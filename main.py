@@ -41,10 +41,17 @@ zipl = itertools.zip_longest
 def my_starmap(func, seq1, seq2):
     return map(lambda p: func(*p), zip(seq1, seq2))
 
-itertools.product # ter vervanging van for in for
+itertools.product
 itertools.permutations
 itertools.combinations
 itertools.combinations_with_replacement
+
+def show_combinatorics():
+    print(list(itertools.product("ABCD", repeat=2)))
+    print(list(itertools.permutations("ABCD", 2)))
+    print(list(itertools.combinations_with_replacement("ABCD", 2)))
+    print(list(itertools.combinations("ABCD", 2)))
+
 # }}}
 
 import collections # {{{
