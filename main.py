@@ -416,7 +416,23 @@ def show_pprint():
 # }}}
 import locale
 import logging
-import decimal
+
+import decimal  # {{{
+from decimal import Decimal
+
+# Exacte representatie van floating point getallen
+
+def how_to_use_decimals():
+    print(0.1 + 0.2 - 0.3)
+
+    print(Decimal('0.1') + Decimal('0.2') - Decimal('0.3'))
+
+def how_not_to_use_decimals():
+    print(Decimal(0.1) + Decimal(0.2) - Decimal(0.3))
+
+
+# }}}
+
 import requests
 # }}}
 
