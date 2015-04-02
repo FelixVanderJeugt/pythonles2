@@ -347,6 +347,10 @@ def how_to_use_pools():
 
 # }}}
 
+# }}}
+
+# Divers {{{
+
 import subprocess as sp  # {{{
 
 def how_to_use_subprocesses1():
@@ -380,11 +384,6 @@ def how_to_use_subprocesses5():
     how_to_use_subprocesses4()
 
 # }}}
-
-# }}}
-
-# Divers {{{
-
 import pdb  # {{{
 
 def how_to_debug():
