@@ -84,24 +84,50 @@ import heapq # {{{
 
 # Multiprocessing en threading {{{
 
-import queue # {{{
-queue.Queue
-#queue.LIFOQueue
-queue.PriorityQueue
-# }}}
-
 import threading # {{{
-# Gebaseerd op het Java threading model
-threading.Thread
-threading.Lock
+# Ongeveer gebaseerd op het Java threading model
+# Verschil: locks en conditievariabelen zijn aparte objecten in Python
+
+class CounterThread(threading.Thread):
+    def run(self):
+        for i in range(10):
+            print(i)
+
+def how_to_use_threads():
+    thread = CounterThread()
+    thread.start()
+    for i in range(10):
+        print(i)
+    thread.join()
+    print('That\'s all folks')
+
+
+lock = thread.Lock()
+def how_to_use_locks():
+    lock.acquire()
+    try:
+        # Do something with some resource
+    finally:
+        lock.release()
+
+
+threading.RLock  # Reentrant lock
 threading.Condition
 threading.Semaphore
 threading.BoundedSemaphore
 threading.Timer
 threading.Barrier
 threading.Event
-# Maar merk op dat GIL
+
 # }}}
+
+import queue # {{{
+queue.Queue
+#queue.LIFOQueue
+queue.PriorityQueue
+# }}}
+
+# Maar merk op dat GIL
 
 import multiprocessing # {{{
 multiprocessing.Process
