@@ -193,6 +193,9 @@ threading.Event
 
 import queue # {{{
 
+# Thread-safe, vooral voor communicatie tussen meerdere threads
+# Niet te verwarren met een gewone queue (zoals collections.deque)
+
 def how_to_use_queues():
     q = queue.Queue()
 
@@ -220,7 +223,12 @@ queue.PriorityQueue
 
 # }}}
 
-# Maar merk op dat GIL
+# GIL
+# Global interpreter lock
+# Zorgt ervoor dat code die niet thread-safe is niet tegelijk  wordt uitgevoerd
+# Zorgt ervoor dat er maar maximaal één thread per keer kan uitgevoerd worden
+# Gevolg: threading zorgt niet voor parallellisatie
+# Oplossing: multiprocessing
 
 import multiprocessing # {{{
 multiprocessing.Process
