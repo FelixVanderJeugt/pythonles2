@@ -157,13 +157,28 @@ def how_to_use_threads():
     print('That\'s all folks')
 
 
-lock = thread.Lock()
+def how_to_use_threads2():
+    def count():
+        for i in range(10):
+            print(i)
+
+    thread = threading.Thread(target=count)
+    thread.start()
+
+
 def how_to_use_locks():
-    lock.acquire()
-    try:
-        # Do something with some resource
-    finally:
-        lock.release()
+    lock = threading.Lock()
+    def f():
+        lock.acquire()
+        try:
+            # Do something with some resource
+            for i in range(5):
+                print(i)
+        finally:
+            lock.release()
+    f()
+    f()
+    f()
 
 
 threading.RLock  # Reentrant lock
