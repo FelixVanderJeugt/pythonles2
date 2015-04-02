@@ -277,7 +277,6 @@ def how_to_pickle():
 
 # }}}
 
-import shelve
 import pprint
 import locale
 import logging
