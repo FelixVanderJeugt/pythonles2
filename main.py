@@ -36,7 +36,10 @@ def odds_and_evens(seq):
     return groupby(seq, key=lambda x: x % 2)
 
 itertools.starmap
-itertools.zip_longest
+zipl = itertools.zip_longest
+
+def my_starmap(func, seq1, seq2):
+    return map(lambda p: func(*p), zip(seq1, seq2))
 
 itertools.product # ter vervanging van for in for
 itertools.permutations
