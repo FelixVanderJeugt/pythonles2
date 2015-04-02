@@ -351,7 +351,19 @@ def how_to_use_subprocesses5():
 
 # Divers {{{
 
-import pdb # {{{
+import pdb  # {{{
+
+def how_to_debug():
+    def f(x):
+        return g(x)
+
+    def g(x):
+        return x + 1
+
+    pdb.set_trace()
+    for i in range(4):
+        print(f(i))
+
 # }}}
 
 import functools # {{{
