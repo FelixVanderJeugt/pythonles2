@@ -1,6 +1,7 @@
 import time
 
 # Collections en itereren {{{
+
 import itertools # {{{
 
 count = itertools.count
@@ -172,9 +173,6 @@ def do_dijkstra():
     print(final)
 
 
-# }}}
-
-# Bytes {{{
 # }}}
 
 # }}}
@@ -449,9 +447,6 @@ def show_pprint():
 
 # }}}
 
-import locale
-import logging
-
 import decimal  # {{{
 from decimal import Decimal
 
@@ -498,6 +493,30 @@ def how_to_profile():
 
 # }}}
 
-# C extensions en SWIG
+# Tools {{{
+
+#  - IPython
+#  - IPython notebook
+#  - virtualenv (http://pymbook.readthedocs.org/en/latest/virtualenv.html)
+#  - Pip/PyPI
+# profiling
+
+
+# }}}
+
+# Toepassingen {{{
+
+#  - NumPy, SciPy (scikit-image, scikit-learn), BioPython, Pandas, matplotlib
+#  - IronPython (implementatie voor .NET en Mono), Jython
+#  - CPython, Cython
+#  - Stackless Python -> gevent
+#  - Pandas
+#  - PyTables
+#  - Pyrex
+#  - Psyco
+#  - Mypy
+#  - Pypy
+
+# }}}
 
 # vim: foldmethod=marker
