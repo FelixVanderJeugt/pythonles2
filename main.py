@@ -138,6 +138,40 @@ def show_bisect():
 # }}}
 
 import heapq # {{{
+def do_dijkstra():
+    Edge = collections.namedtuple("Edge", ["a", "b", "w"]) # from, to, weight
+    Node = collections.namedtuple("Node", ["d", "n"])      # number, distance
+    done = set()
+    edges = {
+        Edge(1, 2, 3), Edge(2, 1, 3),
+        Edge(1, 3, 2), Edge(3, 1, 2),
+        Edge(1, 4, 4), Edge(4, 1, 4),
+        Edge(2, 5, 4), Edge(5, 2, 4),
+        Edge(2, 3, 1), Edge(3, 2, 1),
+        Edge(3, 5, 3), Edge(5, 3, 3),
+        Edge(3, 6, 3), Edge(6, 3, 3),
+        Edge(3, 4, 5), Edge(4, 3, 5),
+        Edge(4, 6, 7), Edge(6, 4, 7),
+        Edge(4, 7, 1), Edge(7, 4, 1),
+        Edge(5, 8, 1), Edge(8, 5, 1),
+        Edge(6, 8, 7), Edge(8, 6, 7),
+        Edge(6, 7, 2), Edge(7, 6, 2),
+        Edge(7, 9, 8), Edge(9, 7, 8),
+        Edge(8, 9, 3), Edge(9, 8, 3)}
+    q = []
+    heapq.heappush(q, Node(d=0, n=1))
+    final = []
+    while q:
+        n = heapq.heappop(q)
+        if n.n not in done:
+            done.add(n.n)
+            final.append(n)
+            for edge in edges:
+                if edge.a == n.n:
+                    heapq.heappush(q, Node(n.d + edge.w, edge.b))
+    print(final)
+
+
 # }}}
 
 # Bytes {{{
