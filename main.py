@@ -1,3 +1,4 @@
+import time
 
 # Collections en itereren {{{
 import itertools # {{{
@@ -202,7 +203,6 @@ def how_to_use_queues():
     def worker():
         while True:
             item = q.get()
-            import time
             time.sleep(1)
             print(item)
             q.task_done()
@@ -223,19 +223,87 @@ queue.PriorityQueue
 
 # }}}
 
-# GIL
+# GIL {{{
 # Global interpreter lock
 # Zorgt ervoor dat code die niet thread-safe is niet tegelijk  wordt uitgevoerd
 # Zorgt ervoor dat er maar maximaal één thread per keer kan uitgevoerd worden
 # Gevolg: threading zorgt niet voor parallellisatie
 # Oplossing: multiprocessing
+# }}}
 
-import multiprocessing # {{{
-multiprocessing.Process
-multiprocessing.Pipe
-multiprocessing.Queue
-multiprocessing.Pool
-# ...
+import multiprocessing as mp # {{{
+
+# Zorgt wel voor parallellisatie
+# Niet in meerdere threads, maar in meerdere processen
+
+# Process werkt zoals Thread
+def how_to_use_processes():
+    def count():
+        for i in range(10):
+            print(i)
+
+    process = mp.Process(target=count)
+    process.start()
+
+    for i in range(10):
+        print(i)
+
+    process.join()
+    print('That\'s all folks')
+
+
+# Omdat processen minder vaak worden gewisseld dan threads, valt de
+# multiprocessing niet op. Dus we voeren wat sleeps in.
+def how_to_use_processes2():
+    def count():
+        for i in range(5):
+            print(i)
+        time.sleep(1)
+        for i in range(5,10):
+            print(i)
+
+    process = mp.Process(target=count)
+    process.start()
+
+    for i in range(5):
+        print(i)
+    time.sleep(1)
+    for i in range(5,10):
+        print(i)
+
+    process.join()
+    print('That\'s all folks')
+
+
+mp.Queue
+# Zelfde als queue.Queue, maar dan voor multiprocessing (ipv multithreading)
+
+mp.Pipe
+# Gelijkaardig aan mp.Queue, maar voor slechts twee processen
+
+
+# Zelfde synchronisatie-primitieven als threading
+mp.Lock
+mp.RLock
+mp.Condition
+mp.Semaphore
+mp.BoundedSemaphore
+mp.Barrier
+mp.Event
+
+
+# Worker pools
+def f(x):
+    time.sleep(1)
+    return x * x
+
+def how_to_use_pools():
+    with mp.Pool(3) as p:
+        print(p.map(f, [1, 2, 3]))
+
+
+# Nog veel meer...
+
 # }}}
 
 import subprocess
