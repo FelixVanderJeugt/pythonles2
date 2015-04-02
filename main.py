@@ -122,7 +122,35 @@ functools.wraps
 import asyncio # {{{
 # }}}
 
-import pickle
+import pickle # {{{
+
+
+class Foo:
+    x = 'blabla'
+
+    def __init__(self, y):
+        self.y = y
+
+
+def how_to_pickle():
+    print(pickle.dumps(True))
+    print(pickle.dumps(5))
+    print(pickle.dumps((None, [{'a': 1}])))
+    print(pickle.dumps(Foo))
+    print(pickle.dumps(Foo(42)))
+
+    foo = Foo(42)
+    with open('somefile', 'wb') as picklefile:
+        pickle.dump(foo, picklefile)
+
+    pickled_foo = pickle.dumps(foo)
+    print(pickle.loads(pickled_foo))
+
+    with open('somefile', 'rb') as picklefile:
+        print(pickle.load(picklefile))
+
+# }}}
+
 import shelve
 import pprint
 import locale
