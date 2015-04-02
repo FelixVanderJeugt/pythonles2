@@ -125,9 +125,16 @@ collections.UserString
 # }}}
 
 import array # {{{
+def show_array():
+    print(array.array('i', range(1, 30)))
 # }}}
 
 import bisect # {{{
+def show_bisect():
+    l = [1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4, 6]
+    bisect.insort_left(l, 5)
+    print(l)
+    print(bisect.bisect_left(l, 3), bisect.bisect_right(l, 3))
 # }}}
 
 import heapq # {{{
@@ -353,7 +360,15 @@ def how_to_pickle():
 
 # }}}
 
-import pprint
+import pprint # {{{
+def show_pprint():
+    complex_object = {
+            1: list(range(20)),
+            2: { 2: (1, 3) },
+            3: ( "hello", list(range(20)) ) }
+    pprint.pprint(complex_object)
+
+# }}}
 import locale
 import logging
 import decimal
