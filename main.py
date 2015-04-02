@@ -313,7 +313,40 @@ def how_to_use_pools():
 
 # }}}
 
-import subprocess
+import subprocess as sp  # {{{
+
+def how_to_use_subprocesses1():
+    exit_code = sp.call(['ls', 'een_bestand'])
+    print(exit_code)
+
+def how_to_use_subprocesses2():
+    exit_code = sp.call(['ls', 'een_bestand'], stderr=sp.DEVNULL)
+    print(exit_code)
+
+def how_to_use_subprocesses3():
+    try:
+        exit_code = sp.check_call(['ls', 'een_bestand'])
+        print(exit_code)
+    except sp.CalledProcessError:
+        print('The command failed')
+
+def how_to_use_subprocesses4():
+    try:
+        out = sp.check_output(['ls', 'een_bestand'])
+        print(out)
+    except sp.CalledProcessError:
+        print('The command failed')
+
+def how_to_use_subprocesses5():
+    open('een_bestand', 'w').close()
+
+    how_to_use_subprocesses1()
+    how_to_use_subprocesses2()
+    how_to_use_subprocesses3()
+    how_to_use_subprocesses4()
+
+# }}}
+
 # }}}
 
 # Divers {{{
