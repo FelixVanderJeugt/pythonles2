@@ -467,9 +467,30 @@ def how_not_to_use_decimals():
 # }}}
 
 import requests
+
+import cProfile as profile  # {{{
+
+def how_to_profile():
+    def f():
+        for i in range(1000000):
+            g()
+        h()
+
+    def g():
+        pass
+
+    def h():
+        time.sleep(1)
+
+    # profile.run('f()')
+
+    locals_ = {'f': f, 'g': g, 'h': h}
+    stats = profile.runctx('f()', {}, locals_, sort='tottime')
+
 # }}}
 
-# profiling
+# }}}
+
 # C extensions en SWIG
 
 # vim: foldmethod=marker
