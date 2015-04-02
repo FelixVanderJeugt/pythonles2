@@ -384,6 +384,7 @@ def how_to_use_subprocesses5():
     how_to_use_subprocesses4()
 
 # }}}
+
 import pdb  # {{{
 
 def how_to_debug():
@@ -447,6 +448,7 @@ def show_pprint():
     pprint.pprint(complex_object)
 
 # }}}
+
 import locale
 import logging
 
@@ -466,7 +468,12 @@ def how_not_to_use_decimals():
 
 # }}}
 
-import requests
+import requests # {{{
+def show_requests():
+    print(requests.get("http://www.curlmyip.com").text)
+
+# }}}
+
 # }}}
 
 # profiling
