@@ -192,9 +192,32 @@ threading.Event
 # }}}
 
 import queue # {{{
-queue.Queue
-#queue.LIFOQueue
+
+def how_to_use_queues():
+    q = queue.Queue()
+
+    def worker():
+        while True:
+            item = q.get()
+            import time
+            time.sleep(1)
+            print(item)
+            q.task_done()
+
+    for i in range(3):
+        t = threading.Thread(target=worker)
+        t.daemon = True
+        t.start()
+
+    for item in range(10):
+        q.put(item)
+
+    q.join()  # Block until all tasks are done
+
+
+queue.LifoQueue  # Stack
 queue.PriorityQueue
+
 # }}}
 
 # Maar merk op dat GIL
