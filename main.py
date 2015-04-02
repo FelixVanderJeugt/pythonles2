@@ -56,11 +56,66 @@ def show_combinatorics():
 
 import collections # {{{
 
-collections.deque
+deque = collections.deque
+
+def check_nesting(string):
+    mapping = { '}': '{', ')': '(', ']': '[' }
+    d = deque()
+    for c in string:
+        if c in mapping:
+            if len(d) == 0: return False
+            e = d.pop()
+            if e != mapping[c]: return False
+        else:
+            d.append(c)
+        print(list(d))
+    return len(d) == 0
+
+class BFSTree(object):
+    def __init__(self, left=None, right=None):
+        self.left = left
+        self.right = right
+    def __iter__(self):
+        q = deque([self])
+        while len(q):
+            current = q.popleft()
+            yield current
+            if current.left: q.append(current.left)
+            if current.right: q.append(current.right)
+
+class StuffTree(BFSTree):
+    def __init__(self, elem, left=None, right=None):
+        super().__init__(left, right)
+        self.elem = elem
+
+def show_bfs():
+    tree = StuffTree(1,
+            StuffTree(2,
+                StuffTree(3),
+                StuffTree(4)),
+            StuffTree(5))
+    print([t.elem for t in tree])
+
 collections.namedtuple
+
+def show_structs():
+    Point = collections.namedtuple("Point", ['x', 'y'])
+    p1 = Point(5, 4)
+    p2 = Point(1, 2)
+    print(p1, p2)
+
 collections.OrderedDict
+
 collections.defaultdict
+
+def count_elements(seq):
+    d = collections.defaultdict(int)
+    for e in seq: d[e] = d[e] + 1
+    return d
+
 collections.Counter
+
+better_count_elements = collections.Counter
 
 collections.UserDict
 collections.UserList
